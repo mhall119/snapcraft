@@ -1,0 +1,26 @@
+name: snap-part-demo
+version: 1.0
+summary: Demo using a snap part
+description: This is a demo snap using Tomcat from another snap
+confinement: strict
+grade: devel
+
+apps:
+ tomcat:
+   command: run.sh
+   daemon: simple
+   plugs: [network-bind]
+
+parts:
+    tomcat:
+        plugin: dump
+        source: tomcat_8.5.5_amd64.snap
+    webapp:
+        plugin: dump
+        source: .
+        organize:
+            sample.war: webapps/sample.war
+        stage:
+            - webapps/sample.war
+        prime:
+            - webapps/sample.war

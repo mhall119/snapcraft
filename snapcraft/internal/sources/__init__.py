@@ -84,6 +84,7 @@ from ._script import Script          # noqa
 from ._subversion import Subversion  # noqa
 from ._tar import Tar                # noqa
 from ._zip import Zip                # noqa
+from ._snap import Snap              # noqa
 
 logging.getLogger('urllib3').setLevel(logging.CRITICAL)
 
@@ -134,6 +135,7 @@ _source_handler = {
     'svn': Subversion,
     'tar': Tar,
     'zip': Zip,
+    'snap': Snap,
 }
 
 
@@ -164,6 +166,8 @@ def _get_source_type_from_uri(source, ignore_errors=False):
         source_type = 'deb'
     elif source.endswith('rpm'):
         source_type = 'rpm'
+    elif source.endswith('.snap'):
+        source_type = 'snap'
     elif common.isurl(source) and not ignore_errors:
         raise ValueError('no handler to manage source ({})'.format(source))
     elif not os.path.isdir(source) and not ignore_errors:
