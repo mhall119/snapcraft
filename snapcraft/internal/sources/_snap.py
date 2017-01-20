@@ -37,13 +37,13 @@ class Snap(FileBase):
             raise errors.IncompatibleOptionsError(
                 'can\'t specify a source-commit for a snap source')
         self.source_channel = self.source_branch or 'stable'
-        self.snap_file = self.source
+        self.snap_file = os.path.basename(self.source)
 
     def pull(self):
         logger.info("Pulling snap: %s" % self.source)
         if self.source.endswith('.snap'):
             super().pull()
-            self.snap_file = os.path.join(self.source_dir, self.source)
+            self.snap_file = os.path.join(self.source_dir, os.path.basename(self.source))
         else:
             self.snap_file = os.path.join(self.source_dir, '%s.snap' % self.source)
             self._download()

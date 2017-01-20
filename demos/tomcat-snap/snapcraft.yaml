@@ -14,7 +14,7 @@ apps:
 parts:
     tomcat:
         plugin: dump
-        source: tomcat_8.5.5_amd64.snap
+        source: http://people.ubuntu.com/~mhall119/snaps/tomcat_8.5.5_amd64.snap
     webapp:
         plugin: dump
         source: .
